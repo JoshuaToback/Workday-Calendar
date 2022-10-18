@@ -3,8 +3,9 @@ $(document).ready(function () {
     $('.saveBtn').on('click', function () {
         // get nearby values
         var value = $(this).siblings('description').val();
-        var time = $(this).parent()
+        var time = $(this).parent().attr('id');
         console.log("time", time);
+        console.log('value', value);
         // save in localStorage
         localStorage.setItem()
         // Show notification that item was saved to localStorage by adding class 'show'
@@ -18,15 +19,29 @@ $(document).ready(function () {
     function hourUpdater() {
         // get current number of hours (preferably with moment.js)
         var currentHour = moment().hours();
-        // loop over time blocks
-        $('.time-block').each(function (){
-            var blockHour = parseInt($(this).attr('id').split('-'))
-        })
-        // loop over time blocks ---> https://api.jquery.com/each/
-        // inside this loop, // check if we've moved past this time. If we have, make the row grey. If it's future, make it green. if it's past, make it red. Using the past, present, and future classes in css file
+        console.log('currentHour', currentHour);
 
+
+        // loop over time blocks
+        var eachFunction = function() {
+            var blockHour = parseInt($(this).attr('data-hour'))
+
+        // loop over time blocks ---> https://api.jquery.com/each/
         // check if we've moved past this time
-    }
+        if (blockHour < currentHour) { 
+            $(this).addClass('past');
+        } else if (blockHour === currentHour) {
+          $(this).removeClass('past');
+          $(this).addClass('present')  
+        } else { 
+            $(this).removeClass('past');
+            $(this).removeClass('present');
+            $(this).addClass('future');
+        }
+        var timeBlock = $('.time-block').each(eachFunction);
+        console.log('timeBlock', timeBlock);     
+        };
+    };
 
     hourUpdater();
 
