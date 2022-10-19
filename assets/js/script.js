@@ -1,6 +1,7 @@
 var dateToday = moment().format('dddd, MMM Do YYYY');
 var currentTime = moment().hour();
 $("#currentDay").html(dateToday);
+// display current day on page
 
 $(document).ready(function () {
     // listen for save button clicks
@@ -13,6 +14,7 @@ $(document).ready(function () {
         // save in localStorage
         localStorage.setItem(time,event);
     });
+    
 
     function hourUpdater() {
 
@@ -49,5 +51,4 @@ $(document).ready(function () {
     ///need to repeat line 21 for all the other hours
 
     hourUpdater();
-    // display current day on page
 });
